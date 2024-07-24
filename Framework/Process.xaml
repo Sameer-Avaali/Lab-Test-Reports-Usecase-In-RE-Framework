@@ -1,0 +1,337 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_MasterDt" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1152,3402</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.PDF</x:String>
+      <x:String>UiPath.PDF.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Vision.OCR</x:String>
+      <x:String>UiPath.OCR.Contracts</x:String>
+      <x:String>UiPath.OCR.Activities</x:String>
+      <x:String>UiPath.OCR.Contracts.Activities</x:String>
+      <x:String>UiPath.Core.Activities.OCR.Engines</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>System.Numerics</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.PDF</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="592,3337.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="InputFileExist" />
+      <Variable x:TypeArguments="x:String" Name="PatientName" />
+      <Variable x:TypeArguments="x:String" Name="PdfToText" />
+      <Variable x:TypeArguments="sd:DataTable" Name="PatientDt" />
+      <Variable x:TypeArguments="x:Int32" Name="PatientNameRowIndex" />
+      <Variable x:TypeArguments="x:String" Name="ReportSummary" />
+      <Variable x:TypeArguments="x:String" Name="DoctorMailAddress" />
+      <Variable x:TypeArguments="x:String" Name="PatientMailAddress" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="530,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:FileExistsX DisplayName="File Exists" Exists="[InputFileExist]" sap:VirtualizedContainerService.HintSize="530,168.66666666666666" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[in_TransactionItem]" />
+    <If Condition="[InputFileExist]" sap:VirtualizedContainerService.HintSize="530,510.6666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,136" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ReadPDFWithOCR DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[in_TransactionItem]" sap:VirtualizedContainerService.HintSize="354,48" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_3" ImageDpi="150" Range="All" Text="[PdfToText]">
+            <ui:ReadPDFWithOCR.OCREngine>
+              <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
+                <ActivityFunc.Argument>
+                  <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                </ActivityFunc.Argument>
+                <p:UiPathDocumentOCR Endpoint="{x:Null}" Output="{x:Null}" PredictionId="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="VHTrgg5foGpKs2xcIwNMHCnqB2D9/UeCGA29CDpR7zHIMeRV3Mu6tyzJCGM+hQC3WyCX1plPTyWtClDTrJZbdg==" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,25.333333333333332" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_3" Image="[Image]" Language="auto" NoopExecution="False" Profile="None" Scale="1" Timeout="100000" />
+              </ActivityFunc>
+            </ui:ReadPDFWithOCR.OCREngine>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ReadPDFWithOCR>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,202.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Throw Exception="[new BusinessRuleException(&quot;File does not exists at specified location&quot;)]" sap:VirtualizedContainerService.HintSize="354,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_2" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[PdfToText.Contains(&quot;Dr Lal PathLabs Ltd&quot;)]" DisplayName="If Statement with PdfToText Check" sap:VirtualizedContainerService.HintSize="530,794" sap2010:WorkflowViewState.IdRef="If_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,196" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Extract the patient name from a PDF text." sap:VirtualizedContainerService.HintSize="434,108" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[PatientName]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[PdfToText.Split("Name ")(1).Split(" ")(0)]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,426" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{ PatientName.ToString,&quot;Invalid File&quot;}]" DataTable="[in_MasterDt]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="354,223.33333333333334" sap2010:WorkflowViewState.IdRef="AddDataRow_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:AddDataRow>
+          <Throw Exception="[new BusinessRuleException(&quot;Invalid File&quot;)]" sap:VirtualizedContainerService.HintSize="354,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[PatientDt]" DisplayName="Read Range Workbook - Reading Patient Master Database" sap:VirtualizedContainerService.HintSize="530,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[in_Config(&quot;Patient Database File Sheet Name&quot;).ToString]" WorkbookPath="[in_Config(&quot;Patient Database File Path&quot;).ToString]" />
+    <ui:LookupDataTable CellValue="{x:Null}" LookupColumnIndex="{x:Null}" LookupDataColumn="{x:Null}" TargetColumnIndex="{x:Null}" TargetColumnName="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[PatientDt]" DisplayName="Lookup Data Table - Fetching row index of specific patient" sap:VirtualizedContainerService.HintSize="530,332.6666666666667" sap2010:WorkflowViewState.IdRef="LookupDataTable_1" LookupColumnName="[in_Config(&quot;Patient Name Header&quot;).ToString]" LookupValue="[PatientName]" RowIndex="[PatientNameRowIndex]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LookupDataTable>
+    <ui:MultipleAssign DisplayName="Perform multiple assignments with doctor and patient mail addresses from DataTable." sap:VirtualizedContainerService.HintSize="530,180" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DoctorMailAddress]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[PatientDt.Rows(PatientNameRowIndex)(in_Config("Doctor Email Header").ToString).ToString()]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[PatientMailAddress]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[PatientDt.Rows(PatientNameRowIndex)(in_Config("Patient Email Header").ToString).ToString()]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <isactr:ConnectorActivity Configuration="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" ConnectionId="b25a213b-1804-4ea4-9b71-231fac50c056" DisplayName="Summarize Text - Generating Mail Body" sap:VirtualizedContainerService.HintSize="530,375.3333333333333" sap2010:WorkflowViewState.IdRef="ConnectorActivity_2" UiPathActivityTypeId="d82ffa74-9757-317d-8c48-1a3a1b4be976">
+      <isactr:ConnectorActivity.FieldObjects>
+        <isactr:FieldObject Name="modelName" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">gpt-35-turbo-0125</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="prompt" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">[PdfToText]</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="detectInputLanguage" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="outputLanguage" Type="FieldArgument" />
+        <isactr:FieldObject Name="out_summary" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:String">[ReportSummary]</OutArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="maxWordCount" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:Int64">100</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="summaryFormat" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">Paragraph</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="temperature" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:Double">0.5</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+      </isactr:ConnectorActivity.FieldObjects>
+    </isactr:ConnectorActivity>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Send_mail - Invoke Workflow File (Mail_Activities\Send_mail.xaml)" sap:VirtualizedContainerService.HintSize="530,210" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Mail_Activities\Send_mail.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config_Dict">[in_Config]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="InPatientName">[PatientName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="InMailBody">[ReportSummary]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="InAttachmentFilePath">[in_TransactionItem]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="InPatientMailAddress">[PatientMailAddress]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="InDoctorMailAddress">[DoctorMailAddress]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{ PatientName.ToString,&quot;Success&quot;}]" DataTable="[in_MasterDt]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="530,223.33333333333334" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:AddDataRow>
+    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="530,79.33333333333333" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
+  </Sequence>
+</Activity>
